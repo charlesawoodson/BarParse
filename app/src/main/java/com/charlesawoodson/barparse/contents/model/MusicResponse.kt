@@ -1,4 +1,4 @@
-package com.charlesawoodson.barparse.temp.api
+package com.charlesawoodson.barparse.contents.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

@@ -1,5 +1,6 @@
-package com.charlesawoodson.barparse.temp.api
+package com.charlesawoodson.barparse.contents.api
 
+import com.charlesawoodson.barparse.contents.model.MusicResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

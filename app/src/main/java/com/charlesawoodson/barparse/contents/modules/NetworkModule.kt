@@ -1,6 +1,7 @@
-package com.charlesawoodson.barparse.temp.api
+package com.charlesawoodson.barparse.contents.modules
 
-import com.charlesawoodson.barparse.temp.repos.MusixMatchRepository
+import com.charlesawoodson.barparse.contents.api.MusixMatchApi
+import com.charlesawoodson.barparse.contents.repos.MusixMatchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +11,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)

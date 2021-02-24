@@ -3,7 +3,7 @@ package com.charlesawoodson.barparse
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.charlesawoodson.barparse.temp.viewmodels.MainViewModel
+import com.charlesawoodson.barparse.contents.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 

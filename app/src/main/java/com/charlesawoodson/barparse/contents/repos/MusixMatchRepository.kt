@@ -1,10 +1,10 @@
-package com.charlesawoodson.barparse.temp.repos
+package com.charlesawoodson.barparse.contents.repos
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.charlesawoodson.barparse.temp.api.MusicResponse
-import com.charlesawoodson.barparse.temp.api.MusixMatchApi
+import com.charlesawoodson.barparse.contents.model.MusicResponse
+import com.charlesawoodson.barparse.contents.api.MusixMatchApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
