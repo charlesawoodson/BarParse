@@ -16,19 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.topArtists.observe(this) {
-            // update ui
-            val topArtists = it.message.body.artistList.joinToString(separator = ", ") { item ->
-                "${item.artist?.artistName}"
-            }
-            topArtistTextView.text = topArtists
-        }
-
         viewModel.topTracks.observe(this) {
             // update ui
-            val topTracks = it.message.body.trackList.joinToString(separator = ", ") { item ->
-                "${item.track?.trackName}"
-            }
+            val topTracks = it.joinToString(separator = ", ") { track -> "${track.trackName}" }
             topTrackTextView.text = topTracks
         }
     }
