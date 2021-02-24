@@ -4,6 +4,7 @@ import com.charlesawoodson.barparse.contents.model.TopArtistsResponse
 import com.charlesawoodson.barparse.contents.model.TopTracksResponse
 import io.reactivex.Observable
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -22,10 +23,10 @@ interface MusixMatchApi {
     ): Observable<TopArtistsResponse>
 
     @GET("chart.tracks.get")
-    fun getTopTracks(
+    suspend fun getTopTracks(
         @Query("country") country: String,
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("page_size") pageSize: Int
-    ): Call<TopTracksResponse>
+    ): Response<TopTracksResponse>
 
 }
