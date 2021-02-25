@@ -6,7 +6,7 @@ import com.charlesawoodson.barparse.contents.model.Track
 class TrackDiffUtilCallBack : DiffUtil.ItemCallback<Track>() {
 
     override fun areItemsTheSame(oldItem: Track, newItem: Track): Boolean {
-        return oldItem.trackId == newItem.trackId
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Track, newItem: Track): Boolean {

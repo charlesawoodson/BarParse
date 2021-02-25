@@ -1,12 +1,10 @@
 package com.charlesawoodson.barparse.contents.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
-import com.charlesawoodson.barparse.contents.model.TopArtistsResponse
 import com.charlesawoodson.barparse.contents.model.Track
 import com.charlesawoodson.barparse.contents.repos.MusixMatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -25,13 +25,13 @@ class TopTracksPagingAdapter :
     }
 
     class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val id: Button = itemView.trackId
-        private val name: Button = itemView.trackName
+        private val trackId: Button = itemView.trackId
+        private val trackName: Button = itemView.trackName
 
         fun bindTrack(track: Track) {
             with(track) {
-                id.text = "Track ID: " + track.trackId
-                name.text = "Track Name: " + track.trackName
+                trackId.text = "Track ID: $id"
+                trackName.text = "Track Name: $name"
             }
         }
     }
