@@ -11,8 +11,8 @@ class TopTracksPagingSource(private val musixMatchApi: MusixMatchApi) :
     PagingSource<Int, Track>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Track> {
-        val page = params.key ?: DEFAULT_PAGE_INDEX
         return try {
+            val page = params.key ?: DEFAULT_PAGE_INDEX
             val response = musixMatchApi.getTopTracks("us", page, params.loadSize)
             val trackList = response.body()?.message?.body?.trackList
             val topTracks = trackList?.map { it.track } ?: emptyList()
@@ -31,6 +31,8 @@ class TopTracksPagingSource(private val musixMatchApi: MusixMatchApi) :
     override fun getRefreshKey(state: PagingState<Int, Track>): Int? {
         return null
     }
+
+    override val keyReuseSupported: Boolean = true
 
     companion object {
         const val DEFAULT_PAGE_INDEX = 1

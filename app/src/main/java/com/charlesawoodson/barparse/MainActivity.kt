@@ -21,15 +21,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setupViews()
         fetchTopTracks()
-
-        /*viewModel.topTracks.observe(this) {
-            // update ui
-            val topTracks = it.joinToString(separator = ", ") { track -> "${track.trackName}" }
-            topTrackTextView.text = topTracks
-        }*/
     }
 
     private fun fetchTopTracks() {
@@ -42,6 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
         tracksRecyclerView.adapter = tracksAdapter
-        // tracksRecyclerView.adapter = tracksAdapter
+        // tracksRecyclerView.adapter = tracksAdapter todo: loader and error
     }
 }

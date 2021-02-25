@@ -38,7 +38,7 @@ class MusixMatchRepository @Inject constructor(private val musixMatchApi: MusixM
     }*/
 
     fun fetchPaginatedTopTracks(): Flow<PagingData<Track>> {
-        return Pager(PagingConfig(pageSize = 10, enablePlaceholders = false)) {
+        return Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
             TopTracksPagingSource(musixMatchApi)
         }.flow
     }

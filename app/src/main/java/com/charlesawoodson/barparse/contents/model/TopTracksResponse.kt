@@ -38,7 +38,7 @@ data class Track(
     @Json(name = "track_rating") val rating: String = "",
     @Json(name = "commontrack_id") val commonId: String = "",
     @Json(name = "instrumental") val instrumental: String = "",
-    @Json(name = "explicit") val explicit: String = "",
+    @Json(name = "explicit") val explicit: Int = 0,
     @Json(name = "has_lyrics") val hasLyrics: String = "",
     @Json(name = "has_subtitles") val hasSubtitles: String = "",
     @Json(name = "has_richsync") val hasRichSync: String = "",

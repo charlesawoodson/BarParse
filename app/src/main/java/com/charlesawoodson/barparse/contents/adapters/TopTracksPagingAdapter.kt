@@ -3,7 +3,9 @@ package com.charlesawoodson.barparse.contents.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.charlesawoodson.barparse.R
@@ -25,13 +27,17 @@ class TopTracksPagingAdapter :
     }
 
     class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val trackId: Button = itemView.trackId
-        private val trackName: Button = itemView.trackName
+        private val trackPositionTextView: TextView = itemView.trackPositionTextView
+        private val trackNameTextView: TextView = itemView.trackNameTextView
+        private val artistNameTextView: TextView = itemView.artistNameTextView
+        private val explicitImageView: ImageView = itemView.explicitImageView
 
         fun bindTrack(track: Track) {
             with(track) {
-                trackId.text = "Track ID: $id"
-                trackName.text = "Track Name: $name"
+                trackPositionTextView.text = (bindingAdapterPosition + 1).toString()
+                trackNameTextView.text = name
+                artistNameTextView.text = artistName
+                explicitImageView.isVisible = explicit == 1
             }
         }
     }

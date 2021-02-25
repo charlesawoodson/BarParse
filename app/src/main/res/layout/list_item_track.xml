@@ -1,22 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="?attr/selectableItemBackground">
 
-    <Button
-        android:id="@+id/trackId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/trackPositionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/row08"
+        android:gravity="center"
+        android:paddingStart="@dimen/row02"
+        android:paddingEnd="@dimen/row02"
+        android:textSize="@dimen/caption5"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/trackNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/row01"
+        android:layout_marginEnd="@dimen/row02"
         android:layout_weight="1"
-        android:text="Button"
-        android:visibility="gone" />
+        android:ellipsize="end"
+        android:gravity="center|start"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/caption5"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/artistNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/trackPositionTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Track Name" />
 
-    <Button
-        android:id="@+id/trackName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+    <TextView
+        android:id="@+id/artistNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/row02"
+        android:layout_marginBottom="@dimen/row01"
+        android:ellipsize="end"
+        android:gravity="center|start"
+        android:maxLines="1"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/caption4"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/explicitImageView"
+        app:layout_constraintTop_toBottomOf="@+id/trackNameTextView"
+        tools:text="Artist Name" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/explicitImageView"
+        android:layout_width="@dimen/row02"
+        android:layout_height="@dimen/row02"
+        android:layout_marginEnd="@dimen/row005"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_outline_explicit_24"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/artistNameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/artistNameTextView"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/trackPositionTextView"
+        app:layout_constraintTop_toTopOf="@+id/artistNameTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

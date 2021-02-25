@@ -17,27 +17,7 @@ class MainViewModel @Inject constructor(
     private val musicRepository: MusixMatchRepository
 ) : BaseViewModel() {
 
-    /*init {
-        musicRepository.getTopArtists("it", 1, 10)
-            .subscribeOn(Schedulers.io())
-            .subscribe(::handleResponse, ::handleError)
-            .disposeOnClear()
-    }*/
-
-
     fun fetchPaginatedTopTracks(): Flow<PagingData<Track>> {
         return musicRepository.fetchPaginatedTopTracks().cachedIn(viewModelScope)
     }
-
-
-    /*val topTracks: LiveData<List<Track>> = musicRepository.getTopTracks("it", 1, 10)
-
-
-    private fun handleResponse(response: TopArtistsResponse) {
-        // topArtists.value = response
-    }
-
-    private fun handleError(error: Throwable) {
-
-    }*/
 }
