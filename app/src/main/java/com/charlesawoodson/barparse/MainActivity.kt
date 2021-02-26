@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.charlesawoodson.barparse.contents.adapters.TopTracksPagingAdapter
+import com.charlesawoodson.barparse.contents.adapters.loading.TopTracksLoadingAdapter
+import com.charlesawoodson.barparse.contents.adapters.paging.TopTracksPagingAdapter
 import com.charlesawoodson.barparse.contents.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,7 +35,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        tracksRecyclerView.adapter = tracksAdapter
-        // tracksRecyclerView.adapter = tracksAdapter todo: loader and error
+        // tracksRecyclerView.adapter = tracksAdapter
+        tracksRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
+            header = TopTracksLoadingAdapter { tracksAdapter.retry() },
+            footer = TopTracksLoadingAdapter { tracksAdapter.retry() }
+        )
     }
 }

@@ -1,4 +1,4 @@
-package com.charlesawoodson.barparse.contents.adapters
+package com.charlesawoodson.barparse.contents.adapters.paging
 
 import android.view.LayoutInflater
 import android.view.View
