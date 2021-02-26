@@ -40,6 +40,12 @@ class TopTracksPagingAdapter :
                 explicitImageView.isVisible = explicit == 1
             }
         }
+
+        init {
+            itemView.setOnClickListener {
+                // todo: add click listener
+            }
+        }
     }
 
 }

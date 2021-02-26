@@ -13,7 +13,7 @@ class TopTracksPagingSource(private val musixMatchApi: MusixMatchApi) :
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Track> {
         return try {
             val page = params.key ?: DEFAULT_PAGE_INDEX
-            val response = musixMatchApi.getTopTracks("us", page, params.loadSize)
+            val response = musixMatchApi.getTopTracks("us", page, 25) // todo: create variables
             val trackList = response.body()?.message?.body?.trackList
             val topTracks = trackList?.map { it.track } ?: emptyList()
             LoadResult.Page(
