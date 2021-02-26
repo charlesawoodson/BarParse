@@ -37,6 +37,6 @@ class TopTracksPagingSource(private val musixMatchApi: MusixMatchApi) :
     companion object {
         const val DEFAULT_PAGE_INDEX = 1
         const val DEFAULT_PAGE_SIZE = 15
-        const val DEFAULT_COUNTRY = "us"
+        const val DEFAULT_COUNTRY = "us" // todo: remove duplication
     }
 }

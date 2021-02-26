@@ -1,7 +1,7 @@
 package com.charlesawoodson.barparse.contents.modules
 
 import com.charlesawoodson.barparse.contents.api.MusixMatchApi
-import com.charlesawoodson.barparse.contents.repos.MusixMatchRepository
+import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

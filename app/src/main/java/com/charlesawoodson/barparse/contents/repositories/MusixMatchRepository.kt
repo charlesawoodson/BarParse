@@ -1,4 +1,4 @@
-package com.charlesawoodson.barparse.contents.repos
+package com.charlesawoodson.barparse.contents.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
