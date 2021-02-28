@@ -13,20 +13,21 @@ import com.charlesawoodson.barparse.contents.diffutil.TrackDiffUtilCallBack
 import com.charlesawoodson.barparse.contents.model.Track
 import kotlinx.android.synthetic.main.list_item_track.view.*
 
-class TopTracksPagingAdapter :
+class TopTracksPagingAdapter(private val listener: OnTrackItemClickListener) :
     PagingDataAdapter<Track, TopTracksPagingAdapter.TrackViewHolder>(TrackDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.list_item_track, parent, false)
-        return TrackViewHolder(view)
+        return TrackViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         getItem(position)?.let { holder.bindTrack(it) }
     }
 
-    class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TrackViewHolder(itemView: View, private val listener: OnTrackItemClickListener) :
+        RecyclerView.ViewHolder(itemView) {
         private val trackPositionTextView: TextView = itemView.trackPositionTextView
         private val trackNameTextView: TextView = itemView.trackNameTextView
         private val artistNameTextView: TextView = itemView.artistNameTextView
@@ -39,13 +40,14 @@ class TopTracksPagingAdapter :
                 artistNameTextView.text = artistName
                 explicitImageView.isVisible = explicit == 1
             }
-        }
 
-        init {
             itemView.setOnClickListener {
-                // todo: add click listener
-            }
+                listener.onTrackItemClick(track)
+            } // todo: set on click in init
         }
     }
 
+    interface OnTrackItemClickListener {
+        fun onTrackItemClick(track: Track)
+    }
 }
