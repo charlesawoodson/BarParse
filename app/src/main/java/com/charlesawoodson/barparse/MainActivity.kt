@@ -1,50 +1,37 @@
 package com.charlesawoodson.barparse
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.charlesawoodson.barparse.contents.adapters.loading.TopTracksLoadingAdapter
-import com.charlesawoodson.barparse.contents.adapters.paging.TopTracksPagingAdapter
-import com.charlesawoodson.barparse.contents.model.Track
-import com.charlesawoodson.barparse.contents.viewmodels.MainViewModel
+import com.charlesawoodson.barparse.contents.fragments.TopTracksFragment
+import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), TopTracksPagingAdapter.OnTrackItemClickListener {
+class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
-
-    private val tracksAdapter = TopTracksPagingAdapter(this)
+    private lateinit var navigator: BottomNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupViews()
-        fetchTopTracks()
-    }
 
-    private fun fetchTopTracks() {
-        lifecycleScope.launch {
-            viewModel.fetchPaginatedTopTracks().collectLatest { pagingData ->
-                tracksAdapter.submitData(pagingData)
-            }
-        }
-    }
-
-    private fun setupViews() {
-        // tracksRecyclerView.adapter = tracksAdapter
-        tracksRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
-            header = TopTracksLoadingAdapter { tracksAdapter.retry() },
-            footer = TopTracksLoadingAdapter { tracksAdapter.retry() }
+        navigator = BottomNavigator.onCreate(
+            fragmentContainer = R.id.fragment_container,
+            bottomNavigationView = findViewById(R.id.bottomnav_view),
+            rootFragmentsFactory = mapOf(
+                R.id.tab1 to { TopTracksFragment() },
+                R.id.tab2 to { TopTracksFragment() },
+                R.id.tab3 to { TopTracksFragment() }
+            ),
+            defaultTab = R.id.tab1,
+            activity = this
         )
     }
 
-    override fun onTrackItemClick(track: Track) {
-        Toast.makeText(applicationContext, track.name, Toast.LENGTH_LONG).show()
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (!navigator.pop()) {
+            super.onBackPressed()
+        }
     }
 }

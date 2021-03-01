@@ -140,5 +140,6 @@
     <dimen name="column48">307.2dp</dimen>
     <dimen name="column49">313.6dp</dimen>
     <dimen name="column50">320dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
 
 </resources>
