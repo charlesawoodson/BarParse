@@ -5,8 +5,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.charlesawoodson.barparse.contents.api.MusixMatchApi
 import com.charlesawoodson.barparse.contents.databases.MusixMatchDatabase
+import com.charlesawoodson.barparse.contents.model.Artist
 import com.charlesawoodson.barparse.contents.model.Track
 import com.charlesawoodson.barparse.contents.model.TrackLyricsResponse
+import com.charlesawoodson.barparse.contents.paging.TopArtistsPagingSource
 import com.charlesawoodson.barparse.contents.paging.TopTracksPagingSource
 import kotlinx.coroutines.flow.Flow
 import java.util.*
@@ -20,6 +22,12 @@ class MusixMatchRepository @Inject constructor(
     fun fetchPaginatedTopTracks(): Flow<PagingData<Track>> {
         return Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
             TopTracksPagingSource(musixMatchApi)
+        }.flow
+    }
+
+    fun fetchPaginatedTopArtists(): Flow<PagingData<Artist>> {
+        return Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
+            TopArtistsPagingSource(musixMatchApi)
         }.flow
     }
 

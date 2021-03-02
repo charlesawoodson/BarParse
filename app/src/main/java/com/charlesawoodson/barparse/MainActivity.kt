@@ -2,6 +2,7 @@ package com.charlesawoodson.barparse
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.charlesawoodson.barparse.contents.fragments.TopArtistsFragment
 import com.charlesawoodson.barparse.contents.fragments.TopTracksFragment
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView = findViewById(R.id.bottomnav_view),
             rootFragmentsFactory = mapOf(
                 R.id.tab1 to { TopTracksFragment() },
-                R.id.tab2 to { TopTracksFragment() },
+                R.id.tab2 to { TopArtistsFragment() },
                 R.id.tab3 to { TopTracksFragment() }
             ),
             defaultTab = R.id.tab1,

@@ -17,11 +17,11 @@ interface MusixMatchApi {
 
     // Provides you the list of top artists from a given country
     @GET("chart.artists.get")
-    fun getTopArtists(
+    suspend fun getTopArtists(
         @Query("country") country: String,
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int
-    ): Observable<TopArtistsResponse>
+    ): Response<TopArtistsResponse>
 
     @GET("chart.tracks.get")
     suspend fun getTopTracks(

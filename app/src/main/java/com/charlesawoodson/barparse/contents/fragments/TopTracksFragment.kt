@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
-import com.charlesawoodson.barparse.contents.adapters.loading.TopTracksLoadingAdapter
+import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TopTracksPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.model.Track
@@ -57,8 +57,8 @@ class TopTracksFragment : Fragment(), TopTracksPagingAdapter.OnTrackItemClickLis
 
     private fun setupViews() {
         tracksRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
-            header = TopTracksLoadingAdapter { tracksAdapter.retry() },
-            footer = TopTracksLoadingAdapter { tracksAdapter.retry() }
+            header = ListItemsLoadingAdapter { tracksAdapter.retry() },
+            footer = ListItemsLoadingAdapter { tracksAdapter.retry() }
         )
     }
 

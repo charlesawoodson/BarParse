@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.charlesawoodson.barparse.R
 import kotlinx.android.synthetic.main.item_loading_state.view.*
 
-class TopTracksLoadingAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<TopTracksLoadingAdapter.LoadingStateViewHolder>() {
+class ListItemsLoadingAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<ListItemsLoadingAdapter.LoadingStateViewHolder>() {
 
     class LoadingStateViewHolder(itemView: View, retry: () -> Unit) :
         RecyclerView.ViewHolder(itemView) {
