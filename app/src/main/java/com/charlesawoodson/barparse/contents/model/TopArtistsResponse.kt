@@ -38,5 +38,12 @@ data class ArtistList(
 @JsonClass(generateAdapter = true)
 data class Artist(
     @Json(name = "artist_id") val artistId: String = "",
-    @Json(name = "artist_name") val artistName: String = ""
+    @Json(name = "artist_name") val artistName: String = "",
+    @Json(name = "artist_country") val artistCountry: String = "",
+    @Json(name = "artist_rating") val artistRating: Int = 0,
+    @Json(name = "artist_twitter_url") val artistTwitterUrl: String = "",
+    @Json(name = "restricted") val restricted: Int = 0,
+    @Json(name = "updated_time") val updatedTime: String = "",
+    @Json(name = "begin_date") val beginDate: String = "",
+    @Json(name = "end_date") val endDate: String = ""
 ) : Parcelable
