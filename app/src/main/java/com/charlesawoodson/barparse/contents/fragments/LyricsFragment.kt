@@ -1,7 +1,6 @@
 package com.charlesawoodson.barparse.contents.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.model.Track
 import com.charlesawoodson.barparse.contents.viewmodels.LyricsViewModel
-import com.charlesawoodson.barparse.contents.viewmodels.TopTracksViewModel
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_lyrics.*
@@ -27,8 +25,6 @@ class LyricsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.d("arguments", arguments.toString())
 
         viewModel.fetchTrackLyrics(arguments.id)
     }
