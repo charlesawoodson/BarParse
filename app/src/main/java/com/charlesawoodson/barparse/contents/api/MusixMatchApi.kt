@@ -2,6 +2,7 @@ package com.charlesawoodson.barparse.contents.api
 
 import com.charlesawoodson.barparse.contents.model.TopArtistsResponse
 import com.charlesawoodson.barparse.contents.model.TopTracksResponse
+import com.charlesawoodson.barparse.contents.model.TrackLyricsResponse
 import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.Response
@@ -28,5 +29,10 @@ interface MusixMatchApi {
         @Query("page") page: Int?,
         @Query("page_size") pageSize: Int
     ): Response<TopTracksResponse>
+
+    @GET("track.lyrics.get")
+    fun getTrackLyrics(
+        @Query("track_id") trackId: String
+    ): Observable<TrackLyricsResponse>
 
 }

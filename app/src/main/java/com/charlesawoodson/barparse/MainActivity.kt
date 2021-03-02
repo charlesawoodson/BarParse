@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         if (!navigator.pop()) {
             super.onBackPressed()
         }

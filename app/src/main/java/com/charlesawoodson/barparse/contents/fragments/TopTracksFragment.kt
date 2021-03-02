@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.TopTracksLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TopTracksPagingAdapter
+import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.model.Track
-import com.charlesawoodson.barparse.contents.viewmodels.MainViewModel
+import com.charlesawoodson.barparse.contents.viewmodels.TopTracksViewModel
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_tracks.*
@@ -24,7 +24,7 @@ class TopTracksFragment : Fragment(), TopTracksPagingAdapter.OnTrackItemClickLis
 
     private lateinit var navigator: BottomNavigator
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: TopTracksViewModel by viewModels()
 
     private val tracksAdapter = TopTracksPagingAdapter(this)
 
@@ -38,23 +38,12 @@ class TopTracksFragment : Fragment(), TopTracksPagingAdapter.OnTrackItemClickLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_top_tracks, container, false)
-
-        navigator = BottomNavigator.provide(requireActivity())
-
-        val tab = when (navigator.currentTab()) {
-            R.id.tab1 -> 1
-            R.id.tab2 -> 2
-            R.id.tab3 -> 3
-            else -> -1
-        }
-        val depth = navigator.currentStackSize()
-
-        return rootView
+        return inflater.inflate(R.layout.fragment_top_tracks, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navigator = BottomNavigator.provide(requireActivity())
         setupViews()
     }
 
@@ -74,6 +63,16 @@ class TopTracksFragment : Fragment(), TopTracksPagingAdapter.OnTrackItemClickLis
     }
 
     override fun onTrackItemClick(track: Track) {
-
+        navigator.addFragment(
+            LyricsFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Mvi.KEY_ARG, track)
+                }
+            },
+            enterAnim = R.anim.open_enter_slide,
+            exitAnim = R.anim.open_exit_slide,
+            popEnterAnim = R.anim.close_enter_slide,
+            popExitAnim = R.anim.close_exit_slide,
+        )
     }
 }
