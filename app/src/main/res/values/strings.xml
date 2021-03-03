@@ -2,4 +2,7 @@
     <string name="app_name">BarParse</string>
     <string name="app_database_name">barparse.db</string>
     <string name="retry">Retry</string>
+    <string name="tracks">Tracks</string>
+    <string name="artists">Artists</string>
+    <string name="explore">Explore</string>
 </resources>

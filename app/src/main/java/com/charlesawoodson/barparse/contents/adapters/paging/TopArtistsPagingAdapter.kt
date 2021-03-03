@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.diffutil.ArtistDiffUtilCallBack
 import com.charlesawoodson.barparse.contents.model.Artist
+import kotlinx.android.synthetic.main.list_item_artist.view.*
 
 class TopArtistsPagingAdapter(private val listener: OnArtistItemClickListener) :
     PagingDataAdapter<Artist, TopArtistsPagingAdapter.ArtistViewHolder>(ArtistDiffUtilCallBack()) {
@@ -27,17 +28,13 @@ class TopArtistsPagingAdapter(private val listener: OnArtistItemClickListener) :
 
     class ArtistViewHolder(itemView: View, private val listener: OnArtistItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
-//        private val artistPositionTextView: TextView = itemView.artistPositionTextView
-//        private val artistNameTextView: TextView = itemView.artistNameTextView
-//        private val artistNameTextView: TextView = itemView.artistNameTextView
-//        private val explicitImageView: ImageView = itemView.explicitImageView
+        private val artistNameTextView: TextView = itemView.artistNameTextView
+        private val artistRatingTextView: TextView = itemView.artistRatingTextView
 
         fun bindArtist(artist: Artist) {
             with(artist) {
-//                artistPositionTextView.text = (bindingAdapterPosition + 1).toString()
-//                artistNameTextView.text = name
-//                artistNameTextView.text = artistName
-//                explicitImageView.isVisible = explicit == 1
+                artistNameTextView.text = artistName
+                artistRatingTextView.text = artistRating.toString()
             }
 
             itemView.setOnClickListener {

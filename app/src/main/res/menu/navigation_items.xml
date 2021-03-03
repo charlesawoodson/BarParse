@@ -4,16 +4,16 @@
     <item
         android:id="@+id/tab1"
         android:icon="@drawable/ic_audiotrack_24"
-        android:title="Tab1"
+        android:title="@string/tracks"
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/tab2"
         android:icon="@drawable/ic_artists_24"
-        android:title="Tab2"
+        android:title="@string/artists"
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/tab3"
         android:icon="@drawable/ic_explore_24"
-        android:title="Tab3"
+        android:title="@string/explore"
         tools:ignore="HardcodedText" />
 </menu>
