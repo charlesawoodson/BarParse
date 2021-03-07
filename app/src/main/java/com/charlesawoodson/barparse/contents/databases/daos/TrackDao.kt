@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.charlesawoodson.barparse.contents.model.Track
+import com.charlesawoodson.barparse.contents.responses.Track
 
 @Dao
 interface TrackDao {

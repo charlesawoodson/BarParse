@@ -1,8 +1,7 @@
 package com.charlesawoodson.barparse.contents.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.charlesawoodson.barparse.contents.model.Artist
-import com.charlesawoodson.barparse.contents.model.Track
+import com.charlesawoodson.barparse.contents.responses.Artist
 
 class ArtistDiffUtilCallBack : DiffUtil.ItemCallback<Artist>() {
 

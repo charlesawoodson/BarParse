@@ -3,14 +3,12 @@ package com.charlesawoodson.barparse.contents.adapters.paging
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.diffutil.ArtistDiffUtilCallBack
-import com.charlesawoodson.barparse.contents.model.Artist
+import com.charlesawoodson.barparse.contents.responses.Artist
 import kotlinx.android.synthetic.main.list_item_artist.view.*
 
 class TopArtistsPagingAdapter(private val listener: OnArtistItemClickListener) :

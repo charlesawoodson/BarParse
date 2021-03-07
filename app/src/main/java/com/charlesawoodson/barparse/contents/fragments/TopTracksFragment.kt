@@ -11,7 +11,7 @@ import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TopTracksPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
-import com.charlesawoodson.barparse.contents.model.Track
+import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.TopTracksViewModel
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint

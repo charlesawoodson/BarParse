@@ -1,4 +1,4 @@
-package com.charlesawoodson.barparse.contents.model
+package com.charlesawoodson.barparse.contents.responses
 
 import android.os.Parcelable
 import androidx.room.Entity

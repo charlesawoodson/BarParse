@@ -10,7 +10,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.diffutil.TrackDiffUtilCallBack
-import com.charlesawoodson.barparse.contents.model.Track
+import com.charlesawoodson.barparse.contents.responses.Track
 import kotlinx.android.synthetic.main.list_item_track.view.*
 
 class TopTracksPagingAdapter(private val listener: OnTrackItemClickListener) :

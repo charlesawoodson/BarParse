@@ -7,13 +7,13 @@ import com.charlesawoodson.barparse.contents.responses.Artist
 import retrofit2.HttpException
 import java.io.IOException
 
-class TopArtistsPagingSource(private val musixMatchApi: MusixMatchApi) :
+class ArtistAlbumsPagingSource(private val musixMatchApi: MusixMatchApi) :
     PagingSource<Int, Artist>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Artist> {
         val page = params.key ?: DEFAULT_PAGE_INDEX
         return try {
-            val response = musixMatchApi.getTopArtists(DEFAULT_COUNTRY, page, DEFAULT_PAGE_SIZE)
+            val response = musixMatchApi.getArtistAlbums(DEFAULT_COUNTRY, page, DEFAULT_PAGE_SIZE)
             val artistList = response.body()?.message?.body?.artistList
             val topArtists = artistList?.map { it.artist } ?: emptyList()
             LoadResult.Page(

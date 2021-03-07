@@ -6,9 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
-import com.charlesawoodson.barparse.contents.extensions.Mvi
-import com.charlesawoodson.barparse.contents.model.Artist
-import com.charlesawoodson.barparse.contents.model.Track
+import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

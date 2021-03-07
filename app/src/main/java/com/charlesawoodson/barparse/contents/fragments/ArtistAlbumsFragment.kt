@@ -11,21 +11,19 @@ import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TopArtistsPagingAdapter
 import com.charlesawoodson.barparse.contents.responses.Artist
-import com.charlesawoodson.barparse.contents.viewmodels.TopArtistsViewModel
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_artists.*
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TopArtistsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClickListener {
+class ArtistAlbumsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClickListener {
 
     private lateinit var navigator: BottomNavigator
 
-    private val viewModel: TopArtistsViewModel by viewModels()
+    private val viewModel: ArtistAlbumsViewModel by viewModels()
 
-    private val artistsAdapter = TopArtistsPagingAdapter(this)
+    private val albumsAdapter = ArtistAlbumsPagingAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class TopArtistsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClick
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_top_artists, container, false)
+        return inflater.inflate(R.layout.fragment_artist_albums, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,16 +46,16 @@ class TopArtistsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClick
 
     private fun fetchTopTracks() {
         lifecycleScope.launch {
-            viewModel.fetchPaginatedTopArtists().collectLatest { pagingData ->
-                artistsAdapter.submitData(pagingData)
+            viewModel.fetchPaginatedArtistAlbums().collectLatest { pagingData ->
+                albumsAdapter.submitData(pagingData)
             }
         }
     }
 
     private fun setupViews() {
-        artistsRecyclerView.adapter = artistsAdapter.withLoadStateHeaderAndFooter(
-            header = ListItemsLoadingAdapter { artistsAdapter.retry() },
-            footer = ListItemsLoadingAdapter { artistsAdapter.retry() }
+        albumsRecyclerView.adapter = albumsAdapter.withLoadStateHeaderAndFooter(
+            header = ListItemsLoadingAdapter { albumsAdapter.retry() },
+            footer = ListItemsLoadingAdapter { albumsAdapter.retry() }
         )
     }
 

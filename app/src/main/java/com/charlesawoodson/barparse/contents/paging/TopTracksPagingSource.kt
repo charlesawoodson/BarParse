@@ -3,7 +3,7 @@ package com.charlesawoodson.barparse.contents.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.charlesawoodson.barparse.contents.api.MusixMatchApi
-import com.charlesawoodson.barparse.contents.model.Track
+import com.charlesawoodson.barparse.contents.responses.Track
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,10 +1,9 @@
 package com.charlesawoodson.barparse.contents.api
 
-import com.charlesawoodson.barparse.contents.model.TopArtistsResponse
-import com.charlesawoodson.barparse.contents.model.TopTracksResponse
-import com.charlesawoodson.barparse.contents.model.TrackLyricsResponse
+import com.charlesawoodson.barparse.contents.responses.TopArtistsResponse
+import com.charlesawoodson.barparse.contents.responses.TopTracksResponse
+import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
 import io.reactivex.Observable
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,7 +14,13 @@ import retrofit2.http.Query
 
 interface MusixMatchApi {
 
-    // Provides you the list of top artists from a given country
+    @GET("chart.tracks.get")
+    suspend fun getTopTracks(
+        @Query("country") country: String,
+        @Query("page") page: Int?,
+        @Query("page_size") pageSize: Int
+    ): Response<TopTracksResponse>
+
     @GET("chart.artists.get")
     suspend fun getTopArtists(
         @Query("country") country: String,
@@ -23,12 +28,15 @@ interface MusixMatchApi {
         @Query("page_size") pageSize: Int
     ): Response<TopArtistsResponse>
 
-    @GET("chart.tracks.get")
-    suspend fun getTopTracks(
-        @Query("country") country: String,
-        @Query("page") page: Int?,
-        @Query("page_size") pageSize: Int
-    ): Response<TopTracksResponse>
+    @GET("artist.albums.get")
+    suspend fun getArtistAlbums(
+        @Query("artist_id") artistId: String,
+        @Query("artist_mbid") artistMbId: String,
+        @Query("g_album_name") groupAlbumName: String = "",
+        @Query("s_release_date") sortByDate: String = "desc",
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
+    ) : Response<>
 
     @GET("track.lyrics.get")
     fun getTrackLyrics(
