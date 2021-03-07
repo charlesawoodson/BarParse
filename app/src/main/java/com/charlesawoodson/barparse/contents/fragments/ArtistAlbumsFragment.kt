@@ -9,18 +9,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
-import com.charlesawoodson.barparse.contents.adapters.paging.TopArtistsPagingAdapter
+import com.charlesawoodson.barparse.contents.adapters.paging.ArtistAlbumsPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.args
+import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.viewmodels.ArtistAlbumsViewModel
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_top_artists.*
+import kotlinx.android.synthetic.main.fragment_artist_albums.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ArtistAlbumsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClickListener {
+class ArtistAlbumsFragment : Fragment(), ArtistAlbumsPagingAdapter.OnAlbumItemClickListener {
 
     private lateinit var navigator: BottomNavigator
 
@@ -64,7 +65,7 @@ class ArtistAlbumsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemCli
         )
     }
 
-    override fun onArtistItemClick(artist: Artist) {
+    override fun onAlbumItemClick(album: Album) {
 //        navigator.addFragment(
 //            AlbumsFragment().apply {
 //                arguments = Bundle().apply {

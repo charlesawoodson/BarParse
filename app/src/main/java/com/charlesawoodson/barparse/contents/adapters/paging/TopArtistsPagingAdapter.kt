@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.charlesawoodson.barparse.R
-import com.charlesawoodson.barparse.contents.diffutil.ArtistDiffUtilCallBack
+import com.charlesawoodson.barparse.contents.adapters.diffutil.ArtistDiffUtilCallBack
 import com.charlesawoodson.barparse.contents.responses.Artist
 import kotlinx.android.synthetic.main.list_item_artist.view.*
 

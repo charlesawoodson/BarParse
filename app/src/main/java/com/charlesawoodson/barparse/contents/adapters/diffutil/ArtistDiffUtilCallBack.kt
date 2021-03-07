@@ -1,4 +1,4 @@
-package com.charlesawoodson.barparse.contents.diffutil
+package com.charlesawoodson.barparse.contents.adapters.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
 import com.charlesawoodson.barparse.contents.responses.Artist
