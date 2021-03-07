@@ -8,6 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.charlesawoodson.barparse.contents.api.MusixMatchApi
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
+import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LyricsViewModel @Inject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val musixMatchApi: MusixMatchApi
+    private val musixMatchRepository: MusixMatchRepository
 ) : BaseViewModel() {
 
     private var _lyricsResponse = MutableLiveData<TrackLyricsResponse>()
@@ -26,7 +27,7 @@ class LyricsViewModel @Inject constructor(
         get() = _lyricsResponse
 
     fun fetchTrackLyrics(trackId: String) {
-        musixMatchApi.getTrackLyrics(trackId)
+        musixMatchRepository.fetchTrackLyrics(trackId)
             .subscribeOn(Schedulers.io())
             .subscribe(::handleResponse, ::handleError)
             .disposeOnClear()

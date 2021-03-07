@@ -11,6 +11,8 @@ import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.paging.TopArtistsPagingSource
 import com.charlesawoodson.barparse.contents.paging.TopTracksPagingSource
 import com.charlesawoodson.barparse.contents.responses.Album
+import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
+import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -35,6 +37,10 @@ class MusixMatchRepository @Inject constructor(
         return Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
             ArtistAlbumsPagingSource(musixMatchApi, artistId)
         }.flow
+    }
+
+    fun fetchTrackLyrics(trackId: String): Observable<TrackLyricsResponse> {
+        return musixMatchApi.getTrackLyrics(trackId)
     }
 
     suspend fun saveTrack(track: Track) {
