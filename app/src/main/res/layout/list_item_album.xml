@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row10"
+    android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/albumArtImageView"
+        android:layout_width="@dimen/row08"
+        android:layout_height="@dimen/row08"
+        android:layout_marginStart="@dimen/row01"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_baseline_album_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/albumNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/row02"
+        android:layout_marginTop="@dimen/row0025"
+        android:textColor="@color/black"
+        android:textSize="@dimen/caption6"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/albumArtImageView"
+        app:layout_constraintTop_toTopOf="@id/albumArtImageView"
+        tools:text="Album Name" />
+
+    <TextView
+        android:id="@+id/artistNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/row02"
+        android:textSize="@dimen/caption5"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/albumArtImageView"
+        app:layout_constraintTop_toBottomOf="@id/albumNameTextView"
+        tools:text="Artist Name" />
+
+    <TextView
+        android:id="@+id/releaseYearTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/row02"
+        android:layout_marginBottom="@dimen/row0025"
+        android:textSize="@dimen/caption2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/albumArtImageView"
+        app:layout_constraintStart_toEndOf="@id/albumArtImageView"
+        tools:text="2021" />
+
+    <ImageView
+        android:id="@+id/explicitImageView"
+        android:layout_width="@dimen/row02"
+        android:layout_height="@dimen/row02"
+        android:layout_marginStart="@dimen/row005"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_outline_explicit_24"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/releaseYearTextView"
+        app:layout_constraintStart_toEndOf="@id/releaseYearTextView"
+        app:layout_constraintTop_toTopOf="@id/releaseYearTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

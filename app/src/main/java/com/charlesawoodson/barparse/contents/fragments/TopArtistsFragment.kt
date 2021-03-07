@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TopArtistsPagingAdapter
+import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.viewmodels.TopArtistsViewModel
 import com.pandora.bottomnavigator.BottomNavigator
@@ -62,16 +63,16 @@ class TopArtistsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClick
     }
 
     override fun onArtistItemClick(artist: Artist) {
-//        navigator.addFragment(
-//            AlbumsFragment().apply {
-//                arguments = Bundle().apply {
-//                    putParcelable(Mvi.KEY_ARG, artist)
-//                }
-//            },
-//            enterAnim = R.anim.open_enter_slide,
-//            exitAnim = R.anim.open_exit_slide,
-//            popEnterAnim = R.anim.close_enter_slide,
-//            popExitAnim = R.anim.close_exit_slide,
-//        )
+        navigator.addFragment(
+            ArtistAlbumsFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Mvi.KEY_ARG, artist)
+                }
+            },
+            enterAnim = R.anim.open_enter_slide,
+            exitAnim = R.anim.open_exit_slide,
+            popEnterAnim = R.anim.close_enter_slide,
+            popExitAnim = R.anim.close_exit_slide,
+        )
     }
 }
