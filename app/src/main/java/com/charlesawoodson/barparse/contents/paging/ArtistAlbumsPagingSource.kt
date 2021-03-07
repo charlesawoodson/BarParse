@@ -3,23 +3,33 @@ package com.charlesawoodson.barparse.contents.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.charlesawoodson.barparse.contents.api.MusixMatchApi
+import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Artist
 import retrofit2.HttpException
 import java.io.IOException
 
-class ArtistAlbumsPagingSource(private val musixMatchApi: MusixMatchApi) :
-    PagingSource<Int, Artist>() {
+class ArtistAlbumsPagingSource(
+    private val musixMatchApi: MusixMatchApi,
+    private val artistId: String
+) : PagingSource<Int, Album>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Artist> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Album> {
         val page = params.key ?: DEFAULT_PAGE_INDEX
         return try {
-            val response = musixMatchApi.getArtistAlbums(DEFAULT_COUNTRY, page, DEFAULT_PAGE_SIZE)
-            val artistList = response.body()?.message?.body?.artistList
-            val topArtists = artistList?.map { it.artist } ?: emptyList()
+            val response = musixMatchApi.getArtistAlbums(
+                artistId = artistId,
+                artistMbId = "",
+                groupAlbumName = "",
+                sortByDate = "desc",
+                page = page,
+                pageSize = DEFAULT_PAGE_SIZE
+            )
+            val albumList = response.body()?.message?.body?.albumList
+            val artistAlbums = albumList?.map { it.album } ?: emptyList()
             LoadResult.Page(
-                topArtists,
+                artistAlbums,
                 prevKey = if (page == DEFAULT_PAGE_INDEX) null else (page - 1),
-                nextKey = if (topArtists.isEmpty()) null else (page + 1)
+                nextKey = if (artistAlbums.isEmpty()) null else (page + 1)
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)
@@ -28,7 +38,7 @@ class ArtistAlbumsPagingSource(private val musixMatchApi: MusixMatchApi) :
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Artist>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Album>): Int? {
         return null
     }
 
@@ -37,6 +47,5 @@ class ArtistAlbumsPagingSource(private val musixMatchApi: MusixMatchApi) :
     companion object {
         const val DEFAULT_PAGE_INDEX = 1
         const val DEFAULT_PAGE_SIZE = 15
-        const val DEFAULT_COUNTRY = "us" // todo: remove duplication
     }
 }

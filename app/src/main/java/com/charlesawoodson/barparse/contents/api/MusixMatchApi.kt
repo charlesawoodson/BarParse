@@ -1,5 +1,6 @@
 package com.charlesawoodson.barparse.contents.api
 
+import com.charlesawoodson.barparse.contents.responses.ArtistAlbumsResponse
 import com.charlesawoodson.barparse.contents.responses.TopArtistsResponse
 import com.charlesawoodson.barparse.contents.responses.TopTracksResponse
 import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
@@ -36,7 +37,7 @@ interface MusixMatchApi {
         @Query("s_release_date") sortByDate: String = "desc",
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
-    ) : Response<>
+    ) : Response<ArtistAlbumsResponse>
 
     @GET("track.lyrics.get")
     fun getTrackLyrics(

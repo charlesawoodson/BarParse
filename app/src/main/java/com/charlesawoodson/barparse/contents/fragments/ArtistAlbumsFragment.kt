@@ -10,10 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TopArtistsPagingAdapter
+import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Artist
+import com.charlesawoodson.barparse.contents.viewmodels.ArtistAlbumsViewModel
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_artists.*
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,11 +26,13 @@ class ArtistAlbumsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemCli
 
     private val viewModel: ArtistAlbumsViewModel by viewModels()
 
+    private val arguments: Artist by args()
+
     private val albumsAdapter = ArtistAlbumsPagingAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchTopTracks()
+        fetchArtistAlbums(arguments.artistId)
     }
 
     override fun onCreateView(
@@ -44,9 +49,9 @@ class ArtistAlbumsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemCli
         setupViews()
     }
 
-    private fun fetchTopTracks() {
+    private fun fetchArtistAlbums(artistId: String) {
         lifecycleScope.launch {
-            viewModel.fetchPaginatedArtistAlbums().collectLatest { pagingData ->
+            viewModel.fetchPaginatedArtistAlbums(artistId).collectLatest { pagingData ->
                 albumsAdapter.submitData(pagingData)
             }
         }

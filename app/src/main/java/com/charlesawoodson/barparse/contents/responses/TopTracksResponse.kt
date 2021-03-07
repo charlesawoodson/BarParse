@@ -54,30 +54,7 @@ data class Track(
     @Json(name = "track_share_url") val shareUrl: String,
     @Json(name = "track_edit_url") val editUrl: String,
     @Json(name = "restricted") val restricted: Int,
-    @Json(name = "updated_time") val updatedTime: String
-    // @Json(name = "primary_genres") val primaryGenres: PrimaryGenres
-) : Parcelable
-
-@Parcelize
-@JsonClass(generateAdapter = true)
-data class PrimaryGenres(
-    @Json(name = "music_genre_list") val musicGenreList: List<MusicGenreList> = emptyList()
-) : Parcelable
-
-@Parcelize
-@JsonClass(generateAdapter = true)
-data class MusicGenreList(
-    @Json(name = "music_genre") val musicGenre: MusicGenre
-) : Parcelable
-
-
-@Parcelize
-@JsonClass(generateAdapter = true)
-data class MusicGenre(
-    @Json(name = "music_genre_id") val id: String = "",
-    @Json(name = "music_genre_parent_id") val parentId: String = "",
-    @Json(name = "music_genre_name") val name: String = "",
-    @Json(name = "music_genre_name_extended") val extendedName: String = "",
-    @Json(name = "music_genre_vanity") val vanity: String = ""
+    @Json(name = "updated_time") val updatedTime: String,
+    @Json(name = "primary_genres") val musicGenres: MusicGenres
 ) : Parcelable
 
