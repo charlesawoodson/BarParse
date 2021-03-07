@@ -44,10 +44,11 @@ data class Album(
     @Json(name = "album_track_count") val albumTrackCount: Int = 0,
     @Json(name = "album_release_date") val albumReleaseDate: String = "",
     @Json(name = "album_release_type") val albumReleaseType: String = "", // todo: create Single/Album Enum
+    @Json(name = "explicit") val explicit: Int = 0,
     @Json(name = "artist_id") val artistId: String = "",
     @Json(name = "artist_name") val artistName: String = "",
-    @Json(name = "primary_genres") val primaryGenres: MusicGenres,
-    @Json(name = "secondary_genres") val secondaryGenres: MusicGenres,
+    @Json(name = "primary_genres") val primaryGenres: MusicGenres? = null,
+    @Json(name = "secondary_genres") val secondaryGenres: MusicGenres? = null,
     @Json(name = "album_pline") val albumPLine: String = "",
     @Json(name = "album_copyright") val albumCopyright: String = "",
     @Json(name = "album_label") val albumLabel: String = "",
