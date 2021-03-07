@@ -37,7 +37,7 @@ class TopArtistsPagingAdapter(private val listener: OnArtistItemClickListener) :
 
             itemView.setOnClickListener {
                 listener.onArtistItemClick(artist)
-            } // todo: set on click in init
+            }
         }
     }
 

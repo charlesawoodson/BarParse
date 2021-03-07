@@ -30,7 +30,7 @@ class TopArtistsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClick
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchTopTracks()
+        fetchTopArtists()
     }
 
     override fun onCreateView(
@@ -47,7 +47,7 @@ class TopArtistsFragment : Fragment(), TopArtistsPagingAdapter.OnArtistItemClick
         setupViews()
     }
 
-    private fun fetchTopTracks() {
+    private fun fetchTopArtists() {
         lifecycleScope.launch {
             viewModel.fetchPaginatedTopArtists().collectLatest { pagingData ->
                 artistsAdapter.submitData(pagingData)

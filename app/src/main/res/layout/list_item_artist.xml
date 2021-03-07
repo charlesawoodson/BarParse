@@ -6,6 +6,17 @@
     android:layout_height="@dimen/row08"
     android:background="?attr/selectableItemBackground">
 
+    <ImageView
+        android:id="@+id/artistImageView"
+        android:layout_width="@dimen/row06"
+        android:layout_height="@dimen/row06"
+        android:layout_marginStart="@dimen/row01"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_baseline_person_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/artistNameTextView"
         android:layout_width="0dp"
@@ -17,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/artistRatingTextView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/artistImageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Artist Name" />
 

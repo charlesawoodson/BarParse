@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -40,14 +41,20 @@ class ArtistAlbumsPagingAdapter(private val listener: OnAlbumItemClickListener) 
 
         fun bindAlbum(album: Album) {
             with(album) {
-                val circularProgressDrawable = CircularProgressDrawable(context)
-                circularProgressDrawable.start()
+                if (albumCoverArt.isNotEmpty()) {
+                    val circularProgressDrawable = CircularProgressDrawable(context)
+                    circularProgressDrawable.start()
 
-                Glide.with(context)
-                    .load(albumCoverArt)
-                    .placeholder(circularProgressDrawable)
-                    .circleCrop()
-                    .into(albumArtImageView)
+                    Glide.with(context)
+                        .load(albumCoverArt)
+                        .placeholder(circularProgressDrawable)
+                        .circleCrop()
+                        .into(albumArtImageView)
+                } else {
+                    albumArtImageView.setImageDrawable(
+                        ContextCompat.getDrawable(context, R.drawable.ic_baseline_album_24)
+                    )
+                }
 
                 albumNameTextView.text = albumName
                 artistNameTextView.text = artistName
