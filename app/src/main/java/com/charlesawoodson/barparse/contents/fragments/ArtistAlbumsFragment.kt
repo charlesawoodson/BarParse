@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.ArtistAlbumsPagingAdapter
+import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Artist
@@ -66,16 +67,16 @@ class ArtistAlbumsFragment : Fragment(), ArtistAlbumsPagingAdapter.OnAlbumItemCl
     }
 
     override fun onAlbumItemClick(album: Album) {
-//        navigator.addFragment(
-//            AlbumsFragment().apply {
-//                arguments = Bundle().apply {
-//                    putParcelable(Mvi.KEY_ARG, artist)
-//                }
-//            },
-//            enterAnim = R.anim.open_enter_slide,
-//            exitAnim = R.anim.open_exit_slide,
-//            popEnterAnim = R.anim.close_enter_slide,
-//            popExitAnim = R.anim.close_exit_slide,
-//        )
+        navigator.addFragment(
+            AlbumTracksFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Mvi.KEY_ARG, album)
+                }
+            },
+            enterAnim = R.anim.open_enter_slide,
+            exitAnim = R.anim.open_exit_slide,
+            popEnterAnim = R.anim.close_enter_slide,
+            popExitAnim = R.anim.close_exit_slide,
+        )
     }
 }
