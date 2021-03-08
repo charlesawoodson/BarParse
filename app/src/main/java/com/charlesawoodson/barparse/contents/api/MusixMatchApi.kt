@@ -37,7 +37,14 @@ interface MusixMatchApi {
         @Query("s_release_date") sortByDate: String = "desc",
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
-    ) : Response<ArtistAlbumsResponse>
+    ): Response<ArtistAlbumsResponse>
+
+    @GET("album.tracks.get")
+    suspend fun getAlbumTracks(
+        @Query("album_id") albumId: String,
+        @Query("page") page: Int?,
+        @Query("page_size") pageSize: Int
+    ): Response<TopTracksResponse> // todo: change to GetTracksResponse
 
     @GET("track.lyrics.get")
     fun getTrackLyrics(
