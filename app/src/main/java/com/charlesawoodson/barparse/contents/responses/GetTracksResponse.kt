@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class TopTracksResponse(
+data class GetTracksResponse(
     @Json(name = "message") val message: TrackListMessage
 ) : Parcelable
 

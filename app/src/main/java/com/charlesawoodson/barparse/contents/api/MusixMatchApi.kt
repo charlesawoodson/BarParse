@@ -2,7 +2,7 @@ package com.charlesawoodson.barparse.contents.api
 
 import com.charlesawoodson.barparse.contents.responses.ArtistAlbumsResponse
 import com.charlesawoodson.barparse.contents.responses.TopArtistsResponse
-import com.charlesawoodson.barparse.contents.responses.TopTracksResponse
+import com.charlesawoodson.barparse.contents.responses.GetTracksResponse
 import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
 import io.reactivex.Observable
 import retrofit2.Response
@@ -20,7 +20,7 @@ interface MusixMatchApi {
         @Query("country") country: String,
         @Query("page") page: Int?,
         @Query("page_size") pageSize: Int
-    ): Response<TopTracksResponse>
+    ): Response<GetTracksResponse>
 
     @GET("chart.artists.get")
     suspend fun getTopArtists(
@@ -40,11 +40,11 @@ interface MusixMatchApi {
     ): Response<ArtistAlbumsResponse>
 
     @GET("album.tracks.get")
-    suspend fun getAlbumTracks(
+    fun getAlbumTracks(
         @Query("album_id") albumId: String,
         @Query("page") page: Int?,
         @Query("page_size") pageSize: Int
-    ): Response<TopTracksResponse> // todo: change to GetTracksResponse
+    ): Observable<GetTracksResponse> // todo: change to GetTracksResponse
 
     @GET("track.lyrics.get")
     fun getTrackLyrics(
