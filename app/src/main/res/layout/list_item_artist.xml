@@ -1,51 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/row08"
-    android:background="?attr/selectableItemBackground">
+<layout>
 
-    <ImageView
-        android:id="@+id/artistImageView"
-        android:layout_width="@dimen/row06"
-        android:layout_height="@dimen/row06"
-        android:layout_marginStart="@dimen/row01"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_baseline_person_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row08"
+        android:background="?attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/artistNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/row02"
-        android:textColor="@color/black"
-        android:textSize="@dimen/caption8"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/artistRatingTextView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/artistImageView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Artist Name" />
+        <ImageView
+            android:id="@+id/artistImageView"
+            android:layout_width="@dimen/row06"
+            android:layout_height="@dimen/row06"
+            android:layout_marginStart="@dimen/row01"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_baseline_person_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/artistRatingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/row02"
-        android:layout_marginEnd="@dimen/row02"
-        android:textColor="@color/black"
-        android:textSize="@dimen/caption7"
-        android:textStyle="italic|bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/artistNameTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="99" />
+        <TextView
+            android:id="@+id/artistNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/row02"
+            android:text="@{artistName}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/caption8"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/artistRatingTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/artistImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Artist Name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/artistRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/row02"
+            android:layout_marginEnd="@dimen/row02"
+            android:text="@{artistRating}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/caption7"
+            android:textStyle="italic|bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/artistNameTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="99" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="artistName"
+            type="String" />
+
+        <variable
+            name="artistRating"
+            type="String" />
+    </data>
+</layout>
