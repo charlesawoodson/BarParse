@@ -9,22 +9,21 @@
 
         <TextView
             android:id="@+id/trackPositionTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/row06"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="@dimen/row02"
-            android:paddingEnd="@dimen/row02"
             android:text="@{trackOrder}"
             android:textSize="@dimen/caption5"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="1" />
+            tools:text="10" />
 
         <TextView
             android:id="@+id/trackNameTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/row0025"
             android:layout_marginTop="@dimen/row01"
             android:layout_marginEnd="@dimen/row02"
             android:layout_weight="1"
@@ -66,6 +65,7 @@
             android:id="@+id/explicitImageView"
             android:layout_width="@dimen/row02"
             android:layout_height="@dimen/row02"
+            android:layout_marginStart="@dimen/row0025"
             android:layout_marginEnd="@dimen/row005"
             android:contentDescription="@null"
             android:src="@drawable/ic_outline_explicit_24"
