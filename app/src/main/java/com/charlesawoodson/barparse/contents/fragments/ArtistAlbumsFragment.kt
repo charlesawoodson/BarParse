@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
-import com.charlesawoodson.barparse.contents.adapters.paging.ArtistAlbumsPagingAdapter
+import com.charlesawoodson.barparse.contents.adapters.paging.AlbumsPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ArtistAlbumsFragment : Fragment(), ArtistAlbumsPagingAdapter.OnAlbumItemClickListener {
+class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickListener {
 
     private lateinit var navigator: BottomNavigator
 
@@ -30,7 +30,9 @@ class ArtistAlbumsFragment : Fragment(), ArtistAlbumsPagingAdapter.OnAlbumItemCl
 
     private val arguments: Artist by args()
 
-    private val albumsAdapter = ArtistAlbumsPagingAdapter(this)
+    private val albumsAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        AlbumsPagingAdapter(this, requireContext())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
