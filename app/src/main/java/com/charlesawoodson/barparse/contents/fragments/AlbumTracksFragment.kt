@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.charlesawoodson.barparse.R
+import com.charlesawoodson.barparse.contents.adapters.TracksAdapter
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
+import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.AlbumTracksViewModel
 import com.charlesawoodson.barparse.databinding.FragmentAlbumTracksBinding
 import com.pandora.bottomnavigator.BottomNavigator
@@ -19,15 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AlbumTracksFragment : Fragment() {
 
-    private val viewModel: AlbumTracksViewModel by viewModels()
-
     private lateinit var navigator: BottomNavigator
-
+    private lateinit var binding: FragmentAlbumTracksBinding
+    private val viewModel: AlbumTracksViewModel by viewModels()
     private val arguments: Album by args()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.fetchAlbumTracks(arguments.albumId, arguments.albumTrackCount)
     }
 
@@ -36,8 +37,7 @@ class AlbumTracksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAlbumTracksBinding.inflate(inflater, container, false)
-
+        binding = FragmentAlbumTracksBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -45,8 +45,14 @@ class AlbumTracksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navigator = BottomNavigator.provide(requireActivity())
 
-        viewModel.albumTracksLiveData.observe(viewLifecycleOwner, {
-            Log.d("TrackersPlus", it.message.body.trackList.toString())
+        // binding.tracksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.albumTracksResponse.observe(viewLifecycleOwner, { response ->
+            binding.tracksRecyclerView.adapter =
+                TracksAdapter(
+                    response.message.body.trackList.map { it.track } as ArrayList<Track>,
+                    requireContext()
+                )
         })
     }
 }

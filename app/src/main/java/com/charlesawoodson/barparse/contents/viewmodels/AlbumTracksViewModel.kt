@@ -10,6 +10,7 @@ import com.charlesawoodson.barparse.contents.api.MusixMatchApi
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
 import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import com.charlesawoodson.barparse.contents.responses.GetTracksResponse
+import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
@@ -24,7 +25,7 @@ class AlbumTracksViewModel @Inject constructor(
 
     private var _albumTracksResponse = MutableLiveData<GetTracksResponse>()
 
-    val albumTracksLiveData: LiveData<GetTracksResponse>
+    val albumTracksResponse: LiveData<GetTracksResponse>
         get() = _albumTracksResponse
 
     fun fetchAlbumTracks(albumId: String, trackCount: Int) {
