@@ -1,16 +1,14 @@
 package com.charlesawoodson.barparse.contents.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.TracksAdapter
+import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Track
@@ -45,14 +43,27 @@ class AlbumTracksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navigator = BottomNavigator.provide(requireActivity())
 
-        // binding.tracksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         viewModel.albumTracksResponse.observe(viewLifecycleOwner, { response ->
             binding.tracksRecyclerView.adapter =
                 TracksAdapter(
                     response.message.body.trackList.map { it.track } as ArrayList<Track>,
-                    requireContext()
+                    requireContext(),
+                    ::navigateToLyrics
                 )
         })
+    }
+
+    private fun navigateToLyrics(track: Track) {
+        navigator.addFragment(
+            LyricsFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Mvi.KEY_ARG, track)
+                }
+            },
+            enterAnim = R.anim.open_enter_slide,
+            exitAnim = R.anim.open_exit_slide,
+            popEnterAnim = R.anim.close_enter_slide,
+            popExitAnim = R.anim.close_exit_slide,
+        )
     }
 }
