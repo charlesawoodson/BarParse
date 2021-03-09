@@ -13,6 +13,8 @@ import com.charlesawoodson.barparse.contents.adapters.paging.TracksPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.TopTracksViewModel
+import com.charlesawoodson.barparse.databinding.FragmentAlbumTracksBinding
+import com.charlesawoodson.barparse.databinding.FragmentTopTracksBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_tracks.*
@@ -23,7 +25,7 @@ import kotlinx.coroutines.launch
 class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListener {
 
     private lateinit var navigator: BottomNavigator
-
+    private lateinit var binding: FragmentTopTracksBinding
     private val viewModel: TopTracksViewModel by viewModels()
 
     private val tracksAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -39,14 +41,19 @@ class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListen
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_top_tracks, container, false)
+    ): View {
+        binding = FragmentTopTracksBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigator = BottomNavigator.provide(requireActivity())
-        setupViews()
+
+        binding.tracksRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
+            header = ListItemsLoadingAdapter { tracksAdapter.retry() },
+            footer = ListItemsLoadingAdapter { tracksAdapter.retry() }
+        )
     }
 
     private fun fetchTopTracks() {
@@ -55,13 +62,6 @@ class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListen
                 tracksAdapter.submitData(pagingData)
             }
         }
-    }
-
-    private fun setupViews() {
-        tracksRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
-            header = ListItemsLoadingAdapter { tracksAdapter.retry() },
-            footer = ListItemsLoadingAdapter { tracksAdapter.retry() }
-        )
     }
 
     override fun onTrackItemClick(track: Track) {
