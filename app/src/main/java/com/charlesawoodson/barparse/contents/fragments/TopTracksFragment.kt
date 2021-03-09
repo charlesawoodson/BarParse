@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
-import com.charlesawoodson.barparse.contents.adapters.paging.TopTracksPagingAdapter
+import com.charlesawoodson.barparse.contents.adapters.paging.TracksPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.TopTracksViewModel
@@ -20,13 +20,15 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TopTracksFragment : Fragment(), TopTracksPagingAdapter.OnTrackItemClickListener {
+class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListener {
 
     private lateinit var navigator: BottomNavigator
 
     private val viewModel: TopTracksViewModel by viewModels()
 
-    private val tracksAdapter = TopTracksPagingAdapter(this)
+    private val tracksAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        TracksPagingAdapter(this, requireContext())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
