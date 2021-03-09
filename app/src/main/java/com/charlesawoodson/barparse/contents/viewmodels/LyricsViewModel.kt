@@ -1,12 +1,9 @@
 package com.charlesawoodson.barparse.contents.viewmodels
 
 import android.util.Log
-import androidx.hilt.Assisted
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.charlesawoodson.barparse.contents.api.MusixMatchApi
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
 import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
@@ -17,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LyricsViewModel @Inject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
     private val musixMatchRepository: MusixMatchRepository
 ) : BaseViewModel() {
 

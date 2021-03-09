@@ -1,12 +1,9 @@
 package com.charlesawoodson.barparse.contents.viewmodels
 
-import androidx.hilt.Assisted
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
-import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import com.charlesawoodson.barparse.contents.responses.Album
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +12,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArtistAlbumsViewModel @Inject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
     private val musicRepository: MusixMatchRepository
 ) : BaseViewModel() {
 
