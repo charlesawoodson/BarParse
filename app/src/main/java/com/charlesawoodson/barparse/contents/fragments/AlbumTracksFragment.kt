@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.viewmodels.AlbumTracksViewModel
+import com.charlesawoodson.barparse.databinding.FragmentAlbumTracksBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,8 +35,10 @@ class AlbumTracksFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_album_tracks, container, false)
+    ): View {
+        val binding = FragmentAlbumTracksBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
