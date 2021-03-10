@@ -16,8 +16,8 @@ data class GetTracksResponse(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class TrackListMessage(
-    @Json(name = "header") val header: MessageHeader,
-    @Json(name = "body") val body: TrackListBody
+    @Json(name = "header") val header: MessageHeader? = null,
+    @Json(name = "body") val body: TrackListBody? = null
 ) : Parcelable
 
 @Parcelize

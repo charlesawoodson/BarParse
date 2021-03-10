@@ -46,7 +46,7 @@ class AlbumTracksFragment : Fragment() {
         viewModel.albumTracksResponse.observe(viewLifecycleOwner, { response ->
             binding.tracksRecyclerView.adapter =
                 TracksAdapter(
-                    response.message.body.trackList.map { it.track } as ArrayList<Track>,
+                    response.message.body?.trackList?.map { it.track } as ArrayList<Track>,
                     requireContext(),
                     ::navigateToLyrics
                 )
@@ -59,11 +59,7 @@ class AlbumTracksFragment : Fragment() {
                 arguments = Bundle().apply {
                     putParcelable(Mvi.KEY_ARG, track)
                 }
-            },
-            enterAnim = R.anim.open_enter_slide,
-            exitAnim = R.anim.open_exit_slide,
-            popEnterAnim = R.anim.close_enter_slide,
-            popExitAnim = R.anim.close_exit_slide,
+            }
         )
     }
 }

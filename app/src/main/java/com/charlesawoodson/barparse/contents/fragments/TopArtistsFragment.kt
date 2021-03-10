@@ -66,11 +66,7 @@ class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickLis
                 arguments = Bundle().apply {
                     putParcelable(Mvi.KEY_ARG, artist)
                 }
-            },
-            enterAnim = R.anim.open_enter_slide,
-            exitAnim = R.anim.open_exit_slide,
-            popEnterAnim = R.anim.close_enter_slide,
-            popExitAnim = R.anim.close_exit_slide,
+            }
         )
     }
 }
