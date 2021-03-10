@@ -48,8 +48,8 @@ class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickLis
         navigator = BottomNavigator.provide(requireActivity())
 
         binding.itemsRecyclerView.adapter = artistsAdapter.withLoadStateHeaderAndFooter(
-            header = ListItemsLoadingAdapter { artistsAdapter.retry() },
-            footer = ListItemsLoadingAdapter { artistsAdapter.retry() }
+            header = ListItemsLoadingAdapter(requireContext()) { artistsAdapter.retry() },
+            footer = ListItemsLoadingAdapter(requireContext()) { artistsAdapter.retry() }
         )
     }
 

@@ -51,8 +51,8 @@ class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickLis
         navigator = BottomNavigator.provide(requireActivity())
 
         binding.itemsRecyclerView.adapter = albumsAdapter.withLoadStateHeaderAndFooter(
-            header = ListItemsLoadingAdapter { albumsAdapter.retry() },
-            footer = ListItemsLoadingAdapter { albumsAdapter.retry() }
+            header = ListItemsLoadingAdapter(requireContext()) { albumsAdapter.retry() },
+            footer = ListItemsLoadingAdapter(requireContext()) { albumsAdapter.retry() }
         )
     }
 

@@ -48,8 +48,8 @@ class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListen
         navigator = BottomNavigator.provide(requireActivity())
 
         binding.itemsRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
-            header = ListItemsLoadingAdapter { tracksAdapter.retry() },
-            footer = ListItemsLoadingAdapter { tracksAdapter.retry() }
+            header = ListItemsLoadingAdapter(requireContext()) { tracksAdapter.retry() },
+            footer = ListItemsLoadingAdapter(requireContext()) { tracksAdapter.retry() }
         )
     }
 
