@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.charlesawoodson.barparse.contents.fragments.TopArtistsFragment
 import com.charlesawoodson.barparse.contents.fragments.TopTracksFragment
+import com.charlesawoodson.barparse.databinding.ActivityMainBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -11,14 +12,16 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navigator: BottomNavigator
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         navigator = BottomNavigator.onCreate(
-            fragmentContainer = R.id.fragment_container,
-            bottomNavigationView = findViewById(R.id.bottomnav_view),
+            fragmentContainer = binding.fragmentContainer.id,
+            bottomNavigationView = binding.bottomnavView,
             rootFragmentsFactory = mapOf(
                 R.id.tab1 to { TopTracksFragment() },
                 R.id.tab2 to { TopArtistsFragment() },
