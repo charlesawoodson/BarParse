@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.ArtistsPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
@@ -16,7 +15,6 @@ import com.charlesawoodson.barparse.contents.viewmodels.TopArtistsViewModel
 import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_top_artists.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.adapters.TracksAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.AlbumTracksViewModel
-import com.charlesawoodson.barparse.databinding.FragmentAlbumTracksBinding
 import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
