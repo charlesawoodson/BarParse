@@ -10,6 +10,7 @@ import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.LyricsViewModel
+import com.charlesawoodson.barparse.databinding.FragmentLyricsBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_lyrics.*
@@ -17,15 +18,13 @@ import kotlinx.android.synthetic.main.fragment_lyrics.*
 @AndroidEntryPoint
 class LyricsFragment : Fragment() {
 
-    private val viewModel: LyricsViewModel by viewModels()
-
     private lateinit var navigator: BottomNavigator
-
+    private lateinit var binding: FragmentLyricsBinding
+    private val viewModel: LyricsViewModel by viewModels()
     private val arguments: Track by args()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.fetchTrackLyrics(arguments.id)
     }
 
@@ -33,8 +32,9 @@ class LyricsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_lyrics, container, false)
+    ): View {
+        binding = FragmentLyricsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class LyricsFragment : Fragment() {
         navigator = BottomNavigator.provide(requireActivity())
 
         viewModel.lyricsLiveData.observe(viewLifecycleOwner, {
-            lyricsTextView.text = it.message.body.lyrics.lyricsBody
+            binding.lyrics = it.message.body.lyrics.lyricsBody
         })
     }
 }
