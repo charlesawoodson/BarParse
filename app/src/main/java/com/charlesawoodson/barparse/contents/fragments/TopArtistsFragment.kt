@@ -13,6 +13,7 @@ import com.charlesawoodson.barparse.contents.adapters.paging.ArtistsPagingAdapte
 import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.viewmodels.TopArtistsViewModel
+import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_artists.*
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickListener {
 
     private lateinit var navigator: BottomNavigator
+    private lateinit var binding: FragmentRecyclerViewBinding
     private val viewModel: TopArtistsViewModel by viewModels()
 
     private val artistsAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -38,15 +40,16 @@ class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickLis
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_top_artists, container, false)
+    ): View {
+        binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigator = BottomNavigator.provide(requireActivity())
 
-        artistsRecyclerView.adapter = artistsAdapter.withLoadStateHeaderAndFooter(
+        binding.itemsRecyclerView.adapter = artistsAdapter.withLoadStateHeaderAndFooter(
             header = ListItemsLoadingAdapter { artistsAdapter.retry() },
             footer = ListItemsLoadingAdapter { artistsAdapter.retry() }
         )

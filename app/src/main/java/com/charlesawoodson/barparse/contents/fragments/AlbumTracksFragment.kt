@@ -14,6 +14,7 @@ import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.AlbumTracksViewModel
 import com.charlesawoodson.barparse.databinding.FragmentAlbumTracksBinding
+import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
 import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlbumTracksFragment : Fragment() {
 
     private lateinit var navigator: BottomNavigator
-    private lateinit var binding: FragmentAlbumTracksBinding
+    private lateinit var binding: FragmentRecyclerViewBinding
     private val viewModel: AlbumTracksViewModel by viewModels()
     private val arguments: Album by args()
 
@@ -35,7 +36,7 @@ class AlbumTracksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAlbumTracksBinding.inflate(inflater, container, false)
+        binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,7 +45,7 @@ class AlbumTracksFragment : Fragment() {
         navigator = BottomNavigator.provide(requireActivity())
 
         viewModel.albumTracksResponse.observe(viewLifecycleOwner, { response ->
-            binding.tracksRecyclerView.adapter =
+            binding.itemsRecyclerView.adapter =
                 TracksAdapter(
                     response.message.body?.trackList?.map { it.track } as ArrayList<Track>,
                     requireContext(),
