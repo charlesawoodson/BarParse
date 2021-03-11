@@ -51,4 +51,25 @@ interface MusixMatchApi {
         @Query("track_id") trackId: String
     ): Observable<TrackLyricsResponse>
 
+    @GET("track.search")
+    fun trackSearch(
+        @Query("q_track") qTrack: String = "",
+        @Query("q_artist") qArtist: String = "",
+        @Query("q_lyrics") qLyrics: String = "",
+        @Query("q_track_artist") qTrackArtist: String = "",
+        @Query("q_writer") qWriter: String = "",
+        @Query("q") query: String = "",
+        @Query("f_artist_id") fArtistId: String = "",
+        @Query("f_music_genre_id") fMusicGenreId: String = "",
+        @Query("f_lyrics_language") fLyricsLanguage: String = "",
+        @Query("f_has_lyrics") fHasLyrics: Int = 0,
+        @Query("f_track_release_group_first_release_date_min") fTrackReleaseGroupDateMin: String = "", // YYYMMDD
+        @Query("f_track_release_group_first_release_date_max") fTrackReleaseGroupDateMax: String = "", // YYYMMDD
+        @Query("s_artist_rating") sArtistRating: String = "", // acs|desc
+        @Query("s_track_rating") sTrackRating: String = "", // acs|desc
+        @Query("quorum_factor") quorumFactor: Float? = null, // 0.1F-0.9F
+        @Query("page") page: Int = 1,
+        @Query("page_size") pageSize: Int = 15
+    )
+
 }
