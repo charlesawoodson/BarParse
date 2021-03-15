@@ -1,12 +1,16 @@
 package com.charlesawoodson.barparse.contents.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
+import androidx.core.view.MenuItemCompat.getActionView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.charlesawoodson.barparse.MainActivity
+import com.charlesawoodson.barparse.R
 import com.charlesawoodson.barparse.contents.viewmodels.LyricsViewModel
 import com.charlesawoodson.barparse.databinding.FragmentLyricsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +32,7 @@ class LyricsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         binding = FragmentLyricsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,5 +43,32 @@ class LyricsFragment : Fragment() {
         viewModel.lyricsLiveData.observe(viewLifecycleOwner, {
             binding.lyrics = it.message.body.lyrics.lyricsBody
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.lyrics_menu, menu)
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnCloseListener { false }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("onQueryTextChange", newText ?: "")
+                return true
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        (activity as MainActivity).supportActionBar?.title = arguments.Track.name
+
+        super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }

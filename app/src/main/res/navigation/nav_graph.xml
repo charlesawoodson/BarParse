@@ -18,7 +18,6 @@
     <fragment
         android:id="@+id/lyricsFragment"
         android:name="com.charlesawoodson.barparse.contents.fragments.LyricsFragment"
-        android:label="LyricsFragment"
         tools:layout="@layout/fragment_lyrics" >
         <argument
             android:name="Track"
