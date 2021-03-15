@@ -1,5 +1,5 @@
 # BarParse
-Using **MusixMatch Api** to implement features using **ViewModels**, **Paging3**, **Retrofit**, **Moshi**, **Hilt Dependency Injection**, and **View Binding**.
+Using **MusixMatch Api** to implement features with **ViewModels**, **ViewBinding**, **Paging3**, **Retrofit**, **Moshi**, **Hilt Dependency Injection**, and **View Binding**.
 <br/>
 **Completed:** Get most popular lyrics and artists with: track.chart.get, artist.chart.get
 <br/>
