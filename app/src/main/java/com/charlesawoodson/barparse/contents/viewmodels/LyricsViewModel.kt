@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.navArgs
 import com.charlesawoodson.barparse.contents.bases.BaseViewModel
+import com.charlesawoodson.barparse.contents.fragments.LyricsFragmentArgs
 import com.charlesawoodson.barparse.contents.repositories.MusixMatchRepository
 import com.charlesawoodson.barparse.contents.responses.TrackLyricsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/topTracksFragment">
+
+    <fragment
+        android:id="@+id/topTracksFragment"
+        android:name="com.charlesawoodson.barparse.contents.fragments.TopTracksFragment"
+        android:label="TopTracksFragment"
+        tools:layout="@layout/fragment_recycler_view">
+        <action
+            android:id="@+id/action_topTracksFragment_to_lyricsFragment"
+            app:destination="@id/lyricsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lyricsFragment"
+        android:name="com.charlesawoodson.barparse.contents.fragments.LyricsFragment"
+        android:label="LyricsFragment"
+        tools:layout="@layout/fragment_lyrics" >
+        <argument
+            android:name="Track"
+            app:argType="com.charlesawoodson.barparse.contents.responses.Track" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topArtistsFragment"
+        android:name="com.charlesawoodson.barparse.contents.fragments.TopArtistsFragment"
+        android:label="TopArtistsFragment"
+        tools:layout="@layout/fragment_recycler_view">
+        <action
+            android:id="@+id/action_topArtistsFragment_to_artistAlbumsFragment"
+            app:destination="@id/artistAlbumsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/artistAlbumsFragment"
+        android:name="com.charlesawoodson.barparse.contents.fragments.ArtistAlbumsFragment"
+        android:label="ArtistAlbumsFragment"
+        tools:layout="@layout/fragment_recycler_view">
+        <argument
+            android:name="Artist"
+            app:argType="com.charlesawoodson.barparse.contents.responses.Artist" />
+        <action
+            android:id="@+id/action_artistAlbumsFragment_to_albumTracksFragment"
+            app:destination="@id/albumTracksFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumTracksFragment"
+        android:name="com.charlesawoodson.barparse.contents.fragments.AlbumTracksFragment"
+        android:label="AlbumTracksFragment"
+        tools:layout="@layout/fragment_recycler_view" >
+        <argument
+            android:name="Album"
+            app:argType="com.charlesawoodson.barparse.contents.responses.Album" />
+        <action
+            android:id="@+id/action_albumTracksFragment_to_lyricsFragment"
+            app:destination="@id/lyricsFragment" />
+    </fragment>
+</navigation>

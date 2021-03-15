@@ -3,17 +3,23 @@ package com.charlesawoodson.barparse
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.charlesawoodson.barparse.contents.fragments.TopArtistsFragment
-import com.charlesawoodson.barparse.contents.fragments.TopTracksFragment
+import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.charlesawoodson.barparse.databinding.ActivityMainBinding
-import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navigator: BottomNavigator
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var navHostFragment: NavHostFragment
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,21 +27,30 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navigator = BottomNavigator.onCreate(
-            fragmentContainer = binding.fragmentContainer.id,
-            bottomNavigationView = binding.bottomnavView,
-            rootFragmentsFactory = mapOf(
-                R.id.tab1 to { TopTracksFragment() },
-                R.id.tab2 to { TopArtistsFragment() },
-                R.id.tab3 to { TopTracksFragment() }
-            ),
-            defaultTab = R.id.tab1,
-            activity = this
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.topTracksFragment, R.id.topArtistsFragment),
+            binding.drawerLayout
         )
+
+        setupDrawerLayout()
+    }
+
+    private fun setupDrawerLayout() {
+        binding.navigationView.setupWithNavController(navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
     override fun onBackPressed() {
-        if (!navigator.pop()) {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
             super.onBackPressed()
         }
     }

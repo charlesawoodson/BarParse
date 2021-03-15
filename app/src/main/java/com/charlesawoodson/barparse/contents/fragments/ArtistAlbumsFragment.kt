@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.AlbumsPagingAdapter
-import com.charlesawoodson.barparse.contents.extensions.Mvi
-import com.charlesawoodson.barparse.contents.extensions.args
 import com.charlesawoodson.barparse.contents.responses.Album
-import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.viewmodels.ArtistAlbumsViewModel
 import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
-import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,10 +21,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickListener {
 
-    private lateinit var navigator: BottomNavigator
     private lateinit var binding: FragmentRecyclerViewBinding
     private val viewModel: ArtistAlbumsViewModel by viewModels()
-    private val arguments: Artist by args()
+    private val arguments: ArtistAlbumsFragmentArgs by navArgs()
 
     private val albumsAdapter by lazy(LazyThreadSafetyMode.NONE) {
         AlbumsPagingAdapter(this, requireContext())
@@ -34,7 +31,7 @@ class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fetchArtistAlbums(arguments.artistId)
+        fetchArtistAlbums(arguments.Artist.artistId)
     }
 
     override fun onCreateView(
@@ -48,7 +45,6 @@ class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigator = BottomNavigator.provide(requireActivity())
 
         binding.itemsRecyclerView.adapter = albumsAdapter.withLoadStateHeaderAndFooter(
             header = ListItemsLoadingAdapter(requireContext()) { albumsAdapter.retry() },
@@ -65,12 +61,8 @@ class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickLis
     }
 
     override fun onAlbumItemClick(album: Album) {
-        navigator.addFragment(
-            AlbumTracksFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(Mvi.KEY_ARG, album)
-                }
-            }
-        )
+        val action =
+            ArtistAlbumsFragmentDirections.actionArtistAlbumsFragmentToAlbumTracksFragment(album)
+        findNavController().navigate(action)
     }
 }

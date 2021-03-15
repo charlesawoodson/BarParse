@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <group
+        android:id="@+id/tracksGroup"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/topTracksFragment"
+            android:icon="@drawable/ic_audiotrack_24"
+            android:title="@string/tracks" />
+
+        <item
+            android:id="@+id/topArtistsFragment"
+            android:icon="@drawable/ic_artists_24"
+            android:title="@string/artists" />
+
+        <item
+            android:id="@+id/exploreFragment"
+            android:icon="@drawable/ic_explore_24"
+            android:title="@string/explore" />
+
+    </group>
+</menu>
