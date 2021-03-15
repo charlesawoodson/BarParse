@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TracksPagingAdapter
 import com.charlesawoodson.barparse.contents.extensions.Mvi
@@ -62,12 +64,7 @@ class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListen
     }
 
     override fun onTrackItemClick(track: Track) {
-        navigator.addFragment(
-            LyricsFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(Mvi.KEY_ARG, track)
-                }
-            }
-        )
+        val action = TopTracksFragmentDirections.actionTopTracksFragmentToLyricsFragment(track)
+        findNavController().navigate(action)
     }
 }
