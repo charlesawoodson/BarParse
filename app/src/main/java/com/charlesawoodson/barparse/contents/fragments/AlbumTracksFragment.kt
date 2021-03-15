@@ -6,27 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.charlesawoodson.barparse.contents.adapters.TracksAdapter
-import com.charlesawoodson.barparse.contents.extensions.Mvi
-import com.charlesawoodson.barparse.contents.extensions.args
-import com.charlesawoodson.barparse.contents.responses.Album
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.AlbumTracksViewModel
 import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
-import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AlbumTracksFragment : Fragment() {
 
-    private lateinit var navigator: BottomNavigator
     private lateinit var binding: FragmentRecyclerViewBinding
     private val viewModel: AlbumTracksViewModel by viewModels()
-    private val arguments: Album by args()
+    private val arguments: AlbumTracksFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchAlbumTracks(arguments.albumId, arguments.albumTrackCount)
+        viewModel.fetchAlbumTracks(arguments.Album.albumId, arguments.Album.albumTrackCount)
     }
 
     override fun onCreateView(
@@ -40,7 +37,6 @@ class AlbumTracksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigator = BottomNavigator.provide(requireActivity())
 
         viewModel.albumTracksResponse.observe(viewLifecycleOwner, { response ->
             binding.itemsRecyclerView.adapter =
@@ -53,12 +49,7 @@ class AlbumTracksFragment : Fragment() {
     }
 
     private fun navigateToLyrics(track: Track) {
-        navigator.addFragment(
-            LyricsFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(Mvi.KEY_ARG, track)
-                }
-            }
-        )
+        val action = AlbumTracksFragmentDirections.actionAlbumTracksFragmentToLyricsFragment(track)
+        findNavController().navigate(action)
     }
 }

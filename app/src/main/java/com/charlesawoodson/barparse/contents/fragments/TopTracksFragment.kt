@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.TracksPagingAdapter
-import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.TopTracksViewModel
 import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
-import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,7 +20,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListener {
 
-    private lateinit var navigator: BottomNavigator
     private lateinit var binding: FragmentRecyclerViewBinding
     private val viewModel: TopTracksViewModel by viewModels()
 
@@ -47,7 +43,6 @@ class TopTracksFragment : Fragment(), TracksPagingAdapter.OnTrackItemClickListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigator = BottomNavigator.provide(requireActivity())
 
         binding.itemsRecyclerView.adapter = tracksAdapter.withLoadStateHeaderAndFooter(
             header = ListItemsLoadingAdapter(requireContext()) { tracksAdapter.retry() },

@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.ArtistsPagingAdapter
-import com.charlesawoodson.barparse.contents.extensions.Mvi
 import com.charlesawoodson.barparse.contents.responses.Artist
 import com.charlesawoodson.barparse.contents.viewmodels.TopArtistsViewModel
 import com.charlesawoodson.barparse.databinding.FragmentRecyclerViewBinding
-import com.pandora.bottomnavigator.BottomNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -21,7 +20,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickListener {
 
-    private lateinit var navigator: BottomNavigator
     private lateinit var binding: FragmentRecyclerViewBinding
     private val viewModel: TopArtistsViewModel by viewModels()
 
@@ -45,7 +43,6 @@ class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigator = BottomNavigator.provide(requireActivity())
 
         binding.itemsRecyclerView.adapter = artistsAdapter.withLoadStateHeaderAndFooter(
             header = ListItemsLoadingAdapter(requireContext()) { artistsAdapter.retry() },
@@ -62,12 +59,8 @@ class TopArtistsFragment : Fragment(), ArtistsPagingAdapter.OnArtistItemClickLis
     }
 
     override fun onArtistItemClick(artist: Artist) {
-        navigator.addFragment(
-            ArtistAlbumsFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(Mvi.KEY_ARG, artist)
-                }
-            }
-        )
+        val action =
+            TopArtistsFragmentDirections.actionTopArtistsFragmentToArtistAlbumsFragment(artist)
+        findNavController().navigate(action)
     }
 }
