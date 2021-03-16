@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/lyricsFragment"
         android:name="com.charlesawoodson.barparse.contents.fragments.LyricsFragment"
-        tools:layout="@layout/fragment_lyrics" >
+        tools:layout="@layout/fragment_lyrics">
         <argument
             android:name="Track"
             app:argType="com.charlesawoodson.barparse.contents.responses.Track" />
@@ -51,7 +51,7 @@
         android:id="@+id/albumTracksFragment"
         android:name="com.charlesawoodson.barparse.contents.fragments.AlbumTracksFragment"
         android:label="AlbumTracksFragment"
-        tools:layout="@layout/fragment_recycler_view" >
+        tools:layout="@layout/fragment_recycler_view">
         <argument
             android:name="Album"
             app:argType="com.charlesawoodson.barparse.contents.responses.Album" />
@@ -59,4 +59,9 @@
             android:id="@+id/action_albumTracksFragment_to_lyricsFragment"
             app:destination="@id/lyricsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.charlesawoodson.barparse.contents.fragments.ExploreFragment"
+        android:label="Explore"
+        tools:layout="@layout/fragment_explore"/>
 </navigation>
