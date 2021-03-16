@@ -2,12 +2,14 @@ package com.charlesawoodson.barparse.contents.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.charlesawoodson.barparse.MainActivity
 import com.charlesawoodson.barparse.contents.adapters.TracksAdapter
 import com.charlesawoodson.barparse.contents.responses.Track
 import com.charlesawoodson.barparse.contents.viewmodels.AlbumTracksViewModel
@@ -31,6 +33,7 @@ class AlbumTracksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,6 +49,11 @@ class AlbumTracksFragment : Fragment() {
                     ::navigateToLyrics
                 )
         })
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        (activity as MainActivity).supportActionBar?.title = arguments.Album.albumName
+        super.onPrepareOptionsMenu(menu)
     }
 
     private fun navigateToLyrics(track: Track) {

@@ -2,6 +2,7 @@ package com.charlesawoodson.barparse.contents.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.charlesawoodson.barparse.MainActivity
 import com.charlesawoodson.barparse.contents.adapters.loading.ListItemsLoadingAdapter
 import com.charlesawoodson.barparse.contents.adapters.paging.AlbumsPagingAdapter
 import com.charlesawoodson.barparse.contents.responses.Album
@@ -39,6 +41,7 @@ class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,6 +53,11 @@ class ArtistAlbumsFragment : Fragment(), AlbumsPagingAdapter.OnAlbumItemClickLis
             header = ListItemsLoadingAdapter(requireContext()) { albumsAdapter.retry() },
             footer = ListItemsLoadingAdapter(requireContext()) { albumsAdapter.retry() }
         )
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        (activity as MainActivity).supportActionBar?.title = arguments.Artist.artistName
+        super.onPrepareOptionsMenu(menu)
     }
 
     private fun fetchArtistAlbums(artistId: String) {
